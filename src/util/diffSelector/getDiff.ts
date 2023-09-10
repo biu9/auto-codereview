@@ -6,7 +6,15 @@ interface IDiff {
   error: any;
 }
 
-const getDiff = () => {
+interface IFile {
+  name:string,
+  content:string,
+}
+
+/**
+ * @description 获取git diff命令的输出
+ */
+const getDiff = ():Array<IFile> => {
   const res: IDiff = {
     message: "",
     error: "",
@@ -19,7 +27,7 @@ const getDiff = () => {
     res.error = error;
   }
 
-  return diffMsgProcessor(res.message);;
+  return diffMsgProcessor(res.message);
 };
 
 export { getDiff };

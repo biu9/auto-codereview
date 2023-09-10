@@ -18,7 +18,12 @@ const regxForEmail = /<.*>/;
 const regxForFilename = /^\+\+\+(.*)/;
 const regxForFileContent = /^\+().*/;
 
-export function diffMsgProcessor(rowDiffMessage: string) {
+/**
+ * @description 处理git diff命令的输出
+ * @param rowDiffMessage git diff命令的输出
+ * @returns {Array<IFile>} 变更的文件
+ */
+export function diffMsgProcessor(rowDiffMessage: string):Array<IFile> {
     const DiffMessage:IDiff = {
         author:'',
         date:'',
@@ -52,7 +57,5 @@ export function diffMsgProcessor(rowDiffMessage: string) {
         }
     }
 
-    console.log(file);
-
-    return "diffMsgProcessor";
+    return file;
 }
