@@ -1,3 +1,3 @@
 export function reviewer() {
-  return 'reviewer';
+  return "reviewer";
 }
