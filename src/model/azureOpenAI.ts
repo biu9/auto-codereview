@@ -16,7 +16,7 @@ export function azureOpenAI() {
     new AzureKeyCredential(azureApiKey),
   );
 
-  async function getReview({ codes }: { codes: ChatMessage[] }) {
+  async function getReview(codes:ChatMessage[]) {
     try {
       const result = await client.getChatCompletions(azureDeploymentId, codes);
       if (result.choices[0].message?.content)
