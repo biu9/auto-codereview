@@ -4,9 +4,9 @@
 
 ### 使用示例
 
-1. ![20230911140009](https://typora-1309407228.cos.ap-shanghai.myqcloud.com/20230911140009.png)
-   
-2. ![20230911140051](https://typora-1309407228.cos.ap-shanghai.myqcloud.com/20230911140051.png)
+![image](https://github.com/biu9/auto-codereview/assets/69721411/d7cf2fcf-18bd-4460-b43f-c39105b13b47)
+![image](https://github.com/biu9/auto-codereview/assets/69721411/42b333bd-e4ad-4721-bd19-1d5abed8e039)
+
 
 ### TODO
 
