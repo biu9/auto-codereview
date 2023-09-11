@@ -2,8 +2,8 @@ import readline from "readline";
 import chalk from "chalk";
 
 interface IFile {
-  name:string,
-  content:string,
+  name: string;
+  content: string;
 }
 
 const rl = readline.createInterface({
@@ -17,9 +17,9 @@ readline.emitKeypressEvents(process.stdin);
  * @description 读取命令行输入, 选择要review的变更
  * @returns {string} 选中的要review的变更的代码路径
  */
-export function readCmd(changedFiles:Array<IFile>):Promise<Array<string>> {
+export function readCmd(changedFiles: Array<IFile>): Promise<Array<string>> {
   return new Promise((resolve, reject) => {
-    const options = changedFiles.map(file => file.name).concat(["确认提交"]);
+    const options = changedFiles.map((file) => file.name).concat(["确认提交"]);
     const selectedIndex: number[] = [];
     let currIndex = 0;
 

@@ -1,15 +1,15 @@
-import { REVIEW_FILE_EXTENSION, IGNORE_FILE } from "../../conf"
+import { REVIEW_FILE_EXTENSION, IGNORE_FILE } from "../../conf";
 
 interface IDiff {
-    author:string,
-    date:string,
-    email:string,
-    message:string,
+  author: string;
+  date: string;
+  email: string;
+  message: string;
 }
 
 interface IFile {
-    name:string,
-    content:string,
+  name: string;
+  content: string;
 }
 
 const regxForAuthor = /Author:.*</;
@@ -23,39 +23,38 @@ const regxForFileContent = /^\+().*/;
  * @param rowDiffMessage git diff命令的输出
  * @returns {Array<IFile>} 变更的文件
  */
-export function diffMsgProcessor(rowDiffMessage: string):Array<IFile> {
-    const DiffMessage:IDiff = {
-        author:'',
-        date:'',
-        email:'',
-        message:'',
-    };
-    const file:Array<IFile> = [];
+export function diffMsgProcessor(rowDiffMessage: string): Array<IFile> {
+  const DiffMessage: IDiff = {
+    author: "",
+    date: "",
+    email: "",
+    message: "",
+  };
+  const file: Array<IFile> = [];
 
-    const tmp = rowDiffMessage.split('\n');
-    for(let i=0;i<tmp.length;) {
-        if(tmp[i].match(regxForFilename)) {
-            const name = tmp[i].replace('+++ b/','').trim();
-            let content = '';
-            i++;
-            while(tmp[i] && !tmp[i].match(regxForFilename)) {
-                if(tmp[i].match(regxForFileContent)) {
-                    content += tmp[i].replace('+','')+ '\n';
-                }
-                i++;
-            }
-            if(IGNORE_FILE.includes(name)) 
-                continue;
-            if(!REVIEW_FILE_EXTENSION.includes(name.slice(name.lastIndexOf('.'))))
-                continue;
-            file.push({
-                name,
-                content
-            });
-        } else {
-            i++;
+  const tmp = rowDiffMessage.split("\n");
+  for (let i = 0; i < tmp.length; ) {
+    if (tmp[i].match(regxForFilename)) {
+      const name = tmp[i].replace("+++ b/", "").trim();
+      let content = "";
+      i++;
+      while (tmp[i] && !tmp[i].match(regxForFilename)) {
+        if (tmp[i].match(regxForFileContent)) {
+          content += tmp[i].replace("+", "") + "\n";
         }
+        i++;
+      }
+      if (IGNORE_FILE.includes(name)) continue;
+      if (!REVIEW_FILE_EXTENSION.includes(name.slice(name.lastIndexOf("."))))
+        continue;
+      file.push({
+        name,
+        content,
+      });
+    } else {
+      i++;
     }
+  }
 
-    return file;
+  return file;
 }

@@ -7,14 +7,14 @@ interface IDiff {
 }
 
 interface IFile {
-  name:string,
-  content:string,
+  name: string;
+  content: string;
 }
 
 /**
  * @description 获取git diff命令的输出
  */
-const getDiff = ():Array<IFile> => {
+const getDiff = (): Array<IFile> => {
   const res: IDiff = {
     message: "",
     error: "",
