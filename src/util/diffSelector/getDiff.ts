@@ -1,15 +1,6 @@
 import { execSync } from "child_process";
 import { diffMsgProcessor } from "./diffMsgProcessor";
-
-interface IDiff {
-  message: string;
-  error: any;
-}
-
-interface IFile {
-  name: string;
-  content: string;
-}
+import { IDiff,IFile } from "../../types";
 
 /**
  * @description 获取git diff命令的输出

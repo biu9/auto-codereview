@@ -1,11 +1,4 @@
-enum ModelProvider {
-  azureOpenAI,
-  openAI,
-}
-
-enum ModelType {
-  gpt316k="gpt-3.5-turbo-16k"
-}
+import { ModelProvider,ModelType } from "../types";
 
 const initState = {
   modelProvider: ModelProvider.azureOpenAI,

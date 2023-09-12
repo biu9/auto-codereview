@@ -3,21 +3,7 @@ import { diffSelector } from "../diffSelector";
 import { codeProcessor } from "../codeProcessor";
 import { model } from "../../model";
 import { resultHandler } from "./reslutHandler";
-
-enum ModelProvider {
-  azureOpenAI,
-  openAI,
-}
-
-enum ModelType {
-  gpt316k="gpt-3.5-turbo-16k"
-}
-
-interface reviewerOptions {
-  modelProvider?: ModelProvider;
-  modelType?: ModelType;
-  maxToken?: number;
-}
+import { ModelProvider,ModelType,reviewerOptions } from "../../types";
 
 /**
  * @description 根据reviewerOptions初始化后续采用的模型类型
@@ -26,7 +12,7 @@ interface reviewerOptions {
 export async function reviewer(reviewerOptions: reviewerOptions) {
   const { modelProvider,modelType,maxToken } = reviewerOptions;
   const modelStoreInstance = modelStore();
-  
+
   if (modelProvider) {
     modelStoreInstance.setModelProvider(modelProvider);
   }

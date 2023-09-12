@@ -1,16 +1,5 @@
 import { REVIEW_FILE_EXTENSION, IGNORE_FILE } from "../../conf";
-
-interface IDiff {
-  author: string;
-  date: string;
-  email: string;
-  message: string;
-}
-
-interface IFile {
-  name: string;
-  content: string;
-}
+import { IFile } from "../../types";
 
 const regxForAuthor = /Author:.*</;
 const regxForDate = /Date:.*\n/;
@@ -24,12 +13,6 @@ const regxForFileContent = /^\+().*/;
  * @returns {Array<IFile>} 变更的文件
  */
 export function diffMsgProcessor(rowDiffMessage: string): Array<IFile> {
-  const DiffMessage: IDiff = {
-    author: "",
-    date: "",
-    email: "",
-    message: "",
-  };
   const file: Array<IFile> = [];
 
   const tmp = rowDiffMessage.split("\n");

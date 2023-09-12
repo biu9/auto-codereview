@@ -2,11 +2,7 @@ import { encoding_for_model } from "tiktoken";
 import { ChatMessage } from "@azure/openai"
 import { PROMPT } from "../../conf";
 import { modelStore } from "../../store";
-
-interface IFile {
-  name: string;
-  content: string;
-}
+import { IFile } from "../../types";
 
 const modelStoreInstance = modelStore();
 

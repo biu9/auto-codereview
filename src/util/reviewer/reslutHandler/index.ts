@@ -1,8 +1,5 @@
 import { localFile } from "./localFile";
-
-enum ResultType {
-    localFile,
-}
+import { ResultType } from "../../../types";
 
 /**
  * @description 代码审查结果处理函数
