@@ -1,11 +1,14 @@
 import { encoding_for_model } from "tiktoken";
 import { ChatMessage } from "@azure/openai"
 import { PROMPT } from "../../conf";
+import { modelStore } from "../../store";
 
 interface IFile {
   name: string;
   content: string;
 }
+
+const modelStoreInstance = modelStore();
 
 /**
  * @description 处理超出token限制的代码
@@ -14,9 +17,10 @@ interface IFile {
  */
 export function splitCode(
   files: Array<IFile>,
-  maxToken: number = 16000,
+  maxToken: number = modelStoreInstance.getMaxToken(),
 ): ChatMessage[][] {
-  const enc = encoding_for_model("gpt-3.5-turbo-16k");
+  const modelType = modelStoreInstance.getModelType();
+  const enc = encoding_for_model(modelType);
   const splitedChatMessage: ChatMessage[][] = [];
   const promptLength = enc.encode(PROMPT).length;
   maxToken -= promptLength;

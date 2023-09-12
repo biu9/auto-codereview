@@ -3,8 +3,14 @@ enum ModelProvider {
   openAI,
 }
 
+enum ModelType {
+  gpt316k="gpt-3.5-turbo-16k"
+}
+
 const initState = {
   modelProvider: ModelProvider.azureOpenAI,
+  modelType: ModelType.gpt316k,
+  maxToken: 16000,
 };
 
 /**
@@ -20,8 +26,28 @@ export function modelStore() {
     return initState.modelProvider;
   }
 
+  function setModelType(modelType: ModelType) {
+    initState.modelType = modelType;
+  }
+
+  function getModelType() {
+    return initState.modelType;
+  }
+
+  function setMaxToken(maxToken: number) {
+    initState.maxToken = maxToken;
+  }
+
+  function getMaxToken() {
+    return initState.maxToken;
+  }
+
   return {
     setModelProvider,
     getModelProvider,
+    setModelType,
+    getModelType,
+    setMaxToken,
+    getMaxToken,
   };
 }

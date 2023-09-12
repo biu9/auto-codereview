@@ -9,8 +9,14 @@ enum ModelProvider {
   openAI,
 }
 
+enum ModelType {
+  gpt316k="gpt-3.5-turbo-16k"
+}
+
 interface reviewerOptions {
   modelProvider?: ModelProvider;
+  modelType?: ModelType;
+  maxToken?: number;
 }
 
 /**
@@ -18,10 +24,19 @@ interface reviewerOptions {
  * @param reviewerOptions
  */
 export async function reviewer(reviewerOptions: reviewerOptions) {
-  const { modelProvider } = reviewerOptions;
-  const modelTypeStoreInstance = modelStore();
+  const { modelProvider,modelType,maxToken } = reviewerOptions;
+  const modelStoreInstance = modelStore();
+  
   if (modelProvider) {
-    modelTypeStoreInstance.setModelProvider(modelProvider);
+    modelStoreInstance.setModelProvider(modelProvider);
+  }
+
+  if(modelType) {
+    modelStoreInstance.setModelType(modelType);
+  }
+
+  if(maxToken) {
+    modelStoreInstance.setMaxToken(maxToken);
   }
 
   const targets = await diffSelector();
