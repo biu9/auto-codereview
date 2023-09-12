@@ -1,1 +1,1 @@
-export declare function localFile(content: string): void;
+export declare function localFile(content: string[]): void;
