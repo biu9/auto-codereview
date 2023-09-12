@@ -1,4 +1,4 @@
-import { ModelProvider,ModelType } from "../types";
+import { ModelProvider, ModelType } from "../types";
 
 const initState = {
   modelProvider: ModelProvider.azureOpenAI,

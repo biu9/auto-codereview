@@ -49,7 +49,11 @@ export function readCmd(changedFiles: Array<IFile>): Promise<Array<string>> {
         renderOptions();
       } else if (key.name === "return") {
         if (currIndex === options.length - 1) {
-          console.log('您选择了:\n', selectedIndex.map((index) => options[index]).join('\n')+'\n开始code review...');
+          console.log(
+            "您选择了:\n",
+            selectedIndex.map((index) => options[index]).join("\n") +
+              "\n开始code review...",
+          );
           resolve(selectedIndex.map((index) => options[index]));
           rl.close();
         } else {
