@@ -1,16 +1,16 @@
-import { modelTypeStore } from "../../store";
+import { modelStore } from "../../store";
 import { diffSelector } from "../diffSelector";
 import { codeProcessor } from "../codeProcessor";
 import { model } from "../../model";
 import { resultHandler } from "./reslutHandler";
 
-enum ModelType {
+enum ModelProvider {
   azureOpenAI,
   openAI,
 }
 
 interface reviewerOptions {
-  modelType?: ModelType;
+  modelProvider?: ModelProvider;
 }
 
 /**
@@ -18,10 +18,10 @@ interface reviewerOptions {
  * @param reviewerOptions
  */
 export async function reviewer(reviewerOptions: reviewerOptions) {
-  const { modelType } = reviewerOptions;
-  const modelTypeStoreInstance = modelTypeStore();
-  if (modelType) {
-    modelTypeStoreInstance.setModelType(modelType);
+  const { modelProvider } = reviewerOptions;
+  const modelTypeStoreInstance = modelStore();
+  if (modelProvider) {
+    modelTypeStoreInstance.setModelProvider(modelProvider);
   }
 
   const targets = await diffSelector();
@@ -29,7 +29,15 @@ export async function reviewer(reviewerOptions: reviewerOptions) {
 
   const currModel = model();
 
-  const res = await currModel.getReview(splitedFiles);
+  const reuqests = splitedFiles.map((splitedFile) =>
+    new Promise((resolve) => {
+      currModel.getReview(splitedFile).then((res) => {
+        resolve(res);
+      });
+    }),
+  );
+  const res = await Promise.all(reuqests) as string[];
+
   const resultHandlerFunc = resultHandler();
   resultHandlerFunc(res);
 }

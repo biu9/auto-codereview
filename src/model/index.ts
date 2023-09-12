@@ -1,7 +1,7 @@
 import { azureOpenAI } from "./azureOpenAI";
-import { modelTypeStore } from "../store";
+import { modelStore } from "../store";
 
-enum ModelType {
+enum ModelProvider {
   azureOpenAI,
   openAI,
 }
@@ -11,11 +11,11 @@ enum ModelType {
  * @returns
  */
 export function model() {
-  const modelTypeStoreInstance = modelTypeStore();
-  const modelType = modelTypeStoreInstance.getModelType();
+  const modelTypeStoreInstance = modelStore();
+  const modelProvider = modelTypeStoreInstance.getModelProvider();
 
-  switch (modelType) {
-    case ModelType.azureOpenAI:
+  switch (modelProvider) {
+    case ModelProvider.azureOpenAI:
       return azureOpenAI();
     default:
       return azureOpenAI();

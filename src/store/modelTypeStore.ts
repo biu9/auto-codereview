@@ -1,27 +1,27 @@
-enum ModelType {
+enum ModelProvider {
   azureOpenAI,
   openAI,
 }
 
 const initState = {
-  modelType: ModelType.azureOpenAI,
+  modelProvider: ModelProvider.azureOpenAI,
 };
 
 /**
- * @description 全局存储modelType
+ * @description 全局存储model相关信息
  * @returns setModelType,getModelType函数
  */
-export function modelTypeStore() {
-  function setModelType(modelType: ModelType) {
-    initState.modelType = modelType;
+export function modelStore() {
+  function setModelProvider(modelProvider: ModelProvider) {
+    initState.modelProvider = modelProvider;
   }
 
-  function getModelType() {
-    return initState.modelType;
+  function getModelProvider() {
+    return initState.modelProvider;
   }
 
   return {
-    setModelType,
-    getModelType,
+    setModelProvider,
+    getModelProvider,
   };
 }
